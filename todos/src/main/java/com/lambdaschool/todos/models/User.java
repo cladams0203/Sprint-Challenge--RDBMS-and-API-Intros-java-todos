@@ -22,6 +22,8 @@ public class User extends Auditable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userid;
 
+
+
     /**
      * The username (String). Cannot be null and must be unique
      */
@@ -43,6 +45,10 @@ public class User extends Auditable
         unique = true)
     @Email
     private String primaryemail;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user")
+    private List<Todos> usertodos = new ArrayList<>();
 
     /**
      * Default constructor used primarily by the JPA.
@@ -161,4 +167,13 @@ public class User extends Auditable
     {
         this.password = password;
     }
+
+    public List<Todos> getTodos() {
+        return usertodos;
+    }
+
+    public void setTodos(List<Todos> usertodos) {
+        this.usertodos = usertodos;
+    }
+
 }
