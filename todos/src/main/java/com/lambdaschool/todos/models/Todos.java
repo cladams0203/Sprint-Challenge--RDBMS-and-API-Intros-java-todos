@@ -18,7 +18,7 @@ public class Todos extends Auditable {
     private boolean completed = false;
 
     @ManyToOne
-    @JoinColumn(name = "userid")
+    @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties(value = "todos", allowSetters = true)
     private User user;
 
